@@ -1,43 +1,53 @@
 
 function calc() {
-    const a = Number(document.getElementById("a").value);
-    const b = Number(document.getElementById("b").value);
+    const a = document.getElementById("a").value;
+    const b = document.getElementById("b").value;
+    const an = Number(a);
+    const bn = Number(b);
     const op = document.getElementById("op").value;
     const res = document.getElementById("res");
 
-    function Soma(a, b) {
-        return a + b
+    function Soma(an, bn) {
+        return an + b
     }
 
-    function Subt(a, b) {
-        return a - b
+    function Subt(an, bn) {
+        return an - bn
     }
 
-    function Mult(a, b) {
-        return a * b
+    function Mult(an, bn) {
+        return an * bn
     }
 
-    function Frac(a, b) {
-        return a / b
+    function Frac(an, bn) {
+        return an / bn
     }
 
     switch (op) {
         case "soma":
-            res.textContent = Soma(a, b)
+            res.textContent = Soma(an, bn)
             break
 
         case "subt":
-            res.textContent = Subt(a, b)
+            res.textContent = Subt(an, bn)
             break
 
         case "frac":
-            res.textContent = Frac(a, b)
+            res.textContent = Frac(an, bn)
             break
 
         case "mult":
-            res.textContent = Mult(a, b)
+            res.textContent = Mult(an, bn)
             break
     }
+
+    if (b == 0 && op == "frac") {
+        res.textContent = "Divisão por Zero não é possível"
+    }
+    else if (a == "" || b == "") {
+        res.textContent = "="
+    }
+
 }
 
 document.getElementById("a").addEventListener("input", calc);

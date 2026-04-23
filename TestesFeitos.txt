@@ -1,0 +1,40 @@
+Documentação de testes para garantir o funcionamento do projeto CalculadoraSimples
+
+1. Objetivo
+- Verificar se a calculadora realiza corretamente as operações básicas.
+- Garantir se a interface responde adequadamente e exibe resultados esperados.
+- Identificar casos de erro e tratar entradas inválidas.
+
+2. Ambiente de teste
+- Sistema operacional: Windows
+- Versão da aplicação: versão atual do projeto (main)
+
+3. Casos de teste (Exploratórios de caixa branca, manual)
+
+3.1. Operações básicas
+- Teste 1: Soma de dois números positivos (ex: 2 + 3 = 5)
+- Teste 2: Subtração de dois números positivos (ex: 7 - 4 = 3)
+- Teste 3: Multiplicação de dois números positivos (ex: 6 * 5 = 30)
+- Teste 4: Divisão de dois números positivos (ex: 10 / 2 = 5)
+- Teste 5: Operações com zero (ex: 0 + 5 = 5, 5 * 0 = 0)
+- Teste 6: Divisão por zero deve ser tratada com mensagem de erro ou bloqueio da operação.
+
+3.2. Números negativos e decimais
+- Teste 7: Soma com número negativo (ex: -2 + 4 = 2)
+- Teste 8: Subtração resultando em número negativo (ex: 3 - 7 = -4)
+- Teste 9: Operação com decimais (ex: 2.5 + 1.2 = 3.7)
+
+3.3. Validação de entrada
+- Teste 10: Inserir caracteres inválidos deve ser rejeitado ou ignorado.
+- Teste 11: Campos vazios ou entrada incompleta devem apresentar aviso ou não executar cálculo.
+
+3.4. Interface e usabilidade
+- Teste 12: Verificar que botões respondem ao clique.
+- Teste 13: Garantir que o resultado aparece no display/formulário corretamente.
+- Teste 14: Reiniciar ou limpar tela funciona e redefine o estado da calculadora.
+
+4. Critérios de aceitação
+- Todos os resultados das operações devem ser corretos.
+- Entradas inválidas devem ser tratadas sem travar o sistema.
+- A interface deve permitir uso contínuo sem falhas.
+- A documentação de testes deve ser atualizada conforme o projeto evolui.
