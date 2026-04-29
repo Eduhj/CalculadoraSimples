@@ -8,7 +8,7 @@ function calc() {
     const res = document.getElementById("res");
 
     function Soma(an, bn) {
-        return an + b
+        return an + bn
     }
 
     function Subt(an, bn) {
