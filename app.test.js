@@ -27,7 +27,8 @@ describe('Mult', () => {
 });
 
 describe('Frac', () => {
-    it('inteiros positivos', () => assert.equal(Frac(4, 4), 1));
+    it('inteiros positivos com ponto fluante', () => assert.equal(Frac(1, 3), 0.3333333333));
+    it('inteiros positivos iguais', () => assert.equal(Frac(4, 4), 1));
     it('com negativo', () => assert.equal(Frac(4, -3), parseFloat((-4 / 3).toFixed(10))));
     it('decimal + zero', () => assert.equal(Frac(4.6, 0), Infinity));
     it('decimal + negativo', () => assert.equal(Frac(4.6, -3), parseFloat((4.6 / -3).toFixed(10))));
