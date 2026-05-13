@@ -1,24 +1,18 @@
-function calc() {
-    const a = document.getElementById("a").value.trim();
-    const b = document.getElementById("b").value.trim();
-    const res = document.getElementById("res");
+document.addEventListener("click", function (e) {
 
-    if (a === "" || b === "") { res.textContent = "="; return; }
+    const res = document.getElementById("res")
 
-    const an = Number(a);
-    const bn = Number(b);
+    const a = document.getElementById("a").value.trim()
+    const b = document.getElementById("b").value.trim()
 
-    if (isNaN(an) || isNaN(bn)) { res.textContent = "Entrada inválida"; return; }
+    const an = Number(a)
+    const bn = Number(b)
 
-    const op = document.getElementById("op").value;
+    const el = e.target
 
-    if (op === "frac" && bn === 0) { res.textContent = "Divisão por zero não é possível"; return; }
+    if (el.id === "soma") res.textContent = Soma(an, bn)
+    if (el.id === "subt") res.textContent = Subt(an, bn)
+    if (el.id === "mult") res.textContent = Mult(an, bn)
+    if (el.id === "frac") res.textContent = Frac(an, bn)
 
-    const ops = { soma: Soma, subt: Subt, mult: Mult, frac: Frac };
-    const fn = ops[op];
-    res.textContent = fn ? formatResult(fn(an, bn)) : "Operação desconhecida";
-}
-
-document.getElementById("a").addEventListener("input", calc);
-document.getElementById("b").addEventListener("input", calc);
-document.getElementById("op").addEventListener("change", calc);
+})
