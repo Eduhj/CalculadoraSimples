@@ -1,7 +1,5 @@
-document.addEventListener("click", function (e) {
-
-    
-
+const display = document.getElementById('display')
+document.addEventListener('click', function (e) {
     const el = e.target
     console.log(el.value)
 
