@@ -1,77 +1,114 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
-  font-family: sans-serif;
-  background: #1a1a2e;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  background: #141414;
+  font-family: sans-serif;
 }
 
-div {
-  background: #fff;
-  border-radius: 16px;
-  border: 2px solid #333;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 300px;
+#div_display {
+  background: #1e1e1e;
+  border-radius: 14px;
+  border: 1px solid #333;
+  padding: 1.5rem;
+  width: 312px;
 }
 
-input[type="number"],
-select {
+#display {
   width: 100%;
-  height: 44px;
-  border: 2px solid #333;
-  border-radius: 8px;
-  background: #f5f5f5;
-  font-size: 16px;
-  padding: 0 12px;
-  outline: none;
-}
-
-input[type="number"]:focus,
-select:focus {
-  border-color: #000;
-  background: #fff;
-}
-
-select {
-  cursor: pointer;
-}
-
-h2 {
-  font-size: 24px;
-  font-weight: 500;
-  color: #333;
-  text-align: center;
-}
-
-button {
-  height: 44px;
-  border: 2px solid #333;
-  border-radius: 8px;
-  background: #f5f5f5;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #e0e0e0;
-}
-
-.botoes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  padding: 0;
+  background: #111111;
   border: none;
-  border-radius: 0;
-  width: 100%;
+  border-radius: 10px;
+  text-align: right;
+  font-size: 26px;
+  font-weight: 500;
+  color: #f0f0f0;
+  padding: 14px 17px;
+  margin-bottom: 16px;
+  outline: none;
+  caret-color: transparent;
+}
+
+#div_botoes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+#div_botoes button {
+  background: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  color: #e0e0e0;
+  font-size: 19px;
+  font-weight: 500;
+  padding: 17px 0;
+  cursor: pointer;
+  transition: background 0.1s, transform 0.08s;
+  font-family: sans-serif;
+}
+
+#div_botoes button:hover {
+  background: #333333;
+  border-color: #444444;
+}
+
+#div_botoes button:active {
+  transform: scale(0.95);
+}
+
+/* Operadores + - * / */
+#div_botoes button[value="+"],
+#div_botoes button[value="-"],
+#div_botoes button[value="*"],
+#div_botoes button[value="/"] {
+  background: #26215c;
+  color: #cecbf6;
+  border-color: #3c3489;
+}
+
+#div_botoes button[value="+"]:hover,
+#div_botoes button[value="-"]:hover,
+#div_botoes button[value="*"]:hover,
+#div_botoes button[value="/"]:hover {
+  background: #3c3489;
+}
+
+/* Igual */
+#div_botoes button[value="="] {
+  background: #534ab7;
+  color: #eeedfe;
+  border-color: #6b62cc;
+}
+
+#div_botoes button[value="="]:hover {
+  background: #6b62cc;
+}
+
+/* CE */
+#div_botoes button[value="CE"] {
+  background: #501313;
+  color: #f7c1c1;
+  border-color: #791f1f;
+}
+
+/* Porcentagem */
+#div_botoes button[value="%"] {
+  background: #412402;
+  color: #fac775;
+  border-color: #854f0b;
+}
+
+/* Sinal +/- */
+#div_botoes button[value="sinal"] {
+  background: #04342c;
+  color: #9fe1cb;
+  border-color: #0f6e56;
 }

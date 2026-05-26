@@ -1,23 +1,21 @@
 <html>
 
 <head>
-  <title>Calculadora Simples</title>
+  <title>Calculadora Simples?</title>
   <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
-  <div>
-    <input id="a" type="number" placeholder="Número">
-    <input id="b" type="number" placeholder="Número">
-
-    <div class="botoes">
-      <button id="soma">+</button>
-      <button id="subt">-</button>
-      <button id="mult">x</button>
-      <button id="frac">/</button>
+  <div id="div_display">
+    <textarea id="display"></textarea>
+    <div id="div_botoes">
+      <button value="%">%</button>  <button value="CE" name="ignore">CE</button> <button value="sinal" name="ignore">+/-</button>  <button value="/">÷</button>
+      <button value="7">7</button>  <button value="8">8</button>              <button value="9">9</button>                      <button value="*">×</button>
+      <button value="4">4</button>  <button value="5">5</button>              <button value="6">6</button>                      <button value="+">+</button>
+      <button value="1">1</button>  <button value="2">2</button>              <button value="3">3</button>                      <button value="-">-</button>
+      <button value=".">,</button>  <button value="0">0</button>              <button value="e">e</button>                      <button value="=" name="ignore">=</button>
     </div>
 
-    <h2 id="res">=</h2>
   </div>
 
   <script src="calc.js"></script>

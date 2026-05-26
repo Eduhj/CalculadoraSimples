@@ -1,18 +1,49 @@
-function isInvalid(v) { return v === '' || v === null || v === undefined || isNaN(v); }
+function calcular(expressao) {
+  if (!expressao || expressao.trim() === "") return "";
 
-function Soma(an, bn) { return (isInvalid(an) || isInvalid(bn)) ? "Math Error" : fixFloat(an + bn); }
-function Subt(an, bn) { return (isInvalid(an) || isInvalid(bn)) ? "Math Error" : fixFloat(an - bn); }
-function Mult(an, bn) { return (isInvalid(an) || isInvalid(bn)) ? "Math Error" : fixFloat(an * bn); }
-function Frac(an, bn) {
-    if (isInvalid(an) || isInvalid(bn) || bn == 0) return "Math Error";
-    return fixFloat(an / bn);
+  try {
+
+    const normalizada = expressao
+      .replace(/,/g, ".")
+      .replace(/(?<![0-9eE])e(?![0-9eE+\-])/g, String(Math.E));
+
+    if (!/^[0-9+\-*/%.eE()\s]+$/.test(normalizada)) {
+      return "Erro";
+    }
+
+    const resultado = new Function("return " + normalizada)();
+
+    if (!isFinite(resultado)) return "Erro";
+
+    return parseFloat(resultado.toPrecision(10)).toString().replace(".", ",");
+  } catch {
+    return "Erro";
+  }
 }
 
-function fixFloat(value) {
-    const r = Math.round(value * 1e10) / 1e10;
-    return r === 0 ? 0 : r;
+function aplicarSinal(valorAtual) {
+  if (!valorAtual || valorAtual === "") return "-";
+  if (valorAtual.startsWith("-")) return valorAtual.slice(1);
+  return "-" + valorAtual;
 }
 
-if (typeof module !== 'undefined') {
-    module.exports = { Soma, Subt, Mult, Frac };
+function aplicarPorcentagem(valorAtual) {
+  if (!valorAtual || valorAtual === "") return "";
+
+  const temOperador = /[+\-*/]/.test(valorAtual);
+
+  if (temOperador) {
+    const resultadoBruto = calcular(valorAtual);
+    if (resultadoBruto === "Erro") return "Erro";
+    const num = parseFloat(resultadoBruto.replace(",", ".")) / 100;
+    return parseFloat(num.toPrecision(10)).toString().replace(".", ",");
+  }
+
+  const num = parseFloat(valorAtual.replace(",", ".")) / 100;
+  if (!isFinite(num)) return "Erro";
+  return parseFloat(num.toPrecision(10)).toString().replace(".", ",");
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { calcular, aplicarSinal, aplicarPorcentagem };
 }
