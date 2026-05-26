@@ -1,10 +1,31 @@
-const display = document.getElementById('display')
-document.addEventListener('click', function (e) {
-    const el = e.target
-    console.log(el.value)
-
-    if (el.value == undefined || el.name == "ignore") {
-        if (el.value == "CE") display.value = ""
-    }
-    else display.value += String(el.value)
-})
+const display = document.getElementById("display");
+ 
+function CollectClick(e) {
+  const el = e.target;
+  if (el.tagName !== "BUTTON") return;
+ 
+  const val = el.value;
+ 
+  switch (val) {
+    case "CE":
+      display.value = "";
+      break;
+ 
+    case "=":
+      display.value = calcular(display.value);
+      break;
+ 
+    case "sinal":
+      display.value = aplicarSinal(display.value);
+      break;
+ 
+    case "%":
+      display.value = aplicarPorcentagem(display.value);
+      break;
+ 
+    default:
+      display.value += val;
+  }
+}
+ 
+document.addEventListener("click", CollectClick);
