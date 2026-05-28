@@ -1,49 +1,67 @@
-function calcular(expressao) {
-  if (!expressao || expressao.trim() === "") return "";
+let resultado = null
 
+function numParaStr(n) {
+  return n.toLocaleString('en-US', { maximumFractionDigits: 10 }).replace(/,/g, '')
+}
+
+function avaliar(expr) {
+  if (!expr || expr.trim() === "") return null
   try {
-
-    const normalizada = expressao
+    const exprJS = expr
       .replace(/,/g, ".")
-      .replace(/(?<![0-9eE])e(?![0-9eE+\-])/g, String(Math.E));
+      .replace(/π/g, "Math.PI")
+    const valor = Function('"use strict"; return (' + exprJS + ')')()
+    if (!isFinite(valor)) return null
+    return valor
+  } catch {
+    return null
+  }
+}
 
-    if (!/^[0-9+\-*/%.eE()\s]+$/.test(normalizada)) {
-      return "Erro";
+function aplicarPorcentagem(expr) {
+  const match = expr.match(/([\d.,]+)$/)
+  if (!match) return expr
+  const num = parseFloat(match[1].replace(",", "."))
+  return expr.slice(0, match.index) + numParaStr(num / 100)
+}
+
+function inverterSinal(expr) {
+  const match = expr.match(/([\d.,]+)$/)
+  if (!match) return expr
+  const num = parseFloat(match[1].replace(",", "."))
+  return expr.slice(0, match.index) + numParaStr(num * -1)
+}
+
+function processarEntrada(valor, exibido) {
+  switch (valor) {
+    case "CE":
+      resultado = null
+      return ""
+
+    case "=": {
+      const res = avaliar(exibido)
+      resultado = res
+      return res !== null ? numParaStr(res) : "Erro"
     }
 
-    const resultado = new Function("return " + normalizada)();
+    case "%":
+      return aplicarPorcentagem(exibido)
 
-    if (!isFinite(resultado)) return "Erro";
+    case "sinal":
+      return inverterSinal(exibido)
 
-    return parseFloat(resultado.toPrecision(10)).toString().replace(".", ",");
-  } catch {
-    return "Erro";
+    default: {
+      if (resultado !== null) {
+        const ehOperador = ["+", "-", "*", "/"].includes(valor)
+        const base = numParaStr(resultado)
+        resultado = null
+        return ehOperador ? base + valor : valor
+      }
+      return exibido + valor
+    }
   }
-}
-
-function aplicarSinal(valorAtual) {
-  if (!valorAtual || valorAtual === "") return "-";
-  if (valorAtual.startsWith("-")) return valorAtual.slice(1);
-  return "-" + valorAtual;
-}
-
-function aplicarPorcentagem(valorAtual) {
-  if (!valorAtual || valorAtual === "") return "";
-
-  const temOperador = /[+\-*/]/.test(valorAtual);
-
-  if (temOperador) {
-    const resultadoBruto = calcular(valorAtual);
-    if (resultadoBruto === "Erro") return "Erro";
-    const num = parseFloat(resultadoBruto.replace(",", ".")) / 100;
-    return parseFloat(num.toPrecision(10)).toString().replace(".", ",");
-  }
-
-  const num = parseFloat(valorAtual.replace(",", ".")) / 100;
-  if (!isFinite(num)) return "Erro";
-  return parseFloat(num.toPrecision(10)).toString().replace(".", ",");
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { calcular, aplicarSinal, aplicarPorcentagem };
+  module.exports = { avaliar, aplicarPorcentagem, inverterSinal, processarEntrada }
 }
